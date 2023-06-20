@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import * as pokemonService from "../services/pokemon.service"
 import { Pokemon, PokemonType } from "../types/pokemon";
@@ -12,6 +12,8 @@ export const PokemonList: FC = () => {
   const [pokemons, setPokemons] = useState<Pokemon[] | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true)
@@ -26,8 +28,6 @@ export const PokemonList: FC = () => {
         setError(error.message)
       })
   }, []);
-
-  console.log('error', error)
 
   // Catch error state
   if( error ) {
@@ -86,17 +86,9 @@ export const PokemonList: FC = () => {
         rowKey="id" 
         loading={loading}
 
-        onRow={(record, rowIndex) => {
-          return {
-            onClick: (event) => {}, // click row
-          };
-        }}
-
-        onHeaderRow={(columns, index) => {
-          return {
-            onClick: () => {}, // click header row
-          };
-        }}
+        onRow={(record) => ({
+          onClick: () => navigate(`/${record.id}`)})
+        }
       />
     </Page>
   );
