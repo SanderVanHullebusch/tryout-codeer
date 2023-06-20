@@ -7,12 +7,10 @@ import { PokemonList } from "./pokemons/pokemon.list";
 function App() {
     return (
         <Router>
-            <div>
-                <Routes>
-                    <Route path="/" element={<PokemonList />} />
-                    <Route path="/:id" element={<PokemonDetail />} />
-                </Routes>
-            </div>
+            <Routes>
+                <Route path="/" element={<PokemonList />} />
+                <Route path="/:id" element={<PokemonDetail />} />
+            </Routes>
         </Router>
     );
 }
