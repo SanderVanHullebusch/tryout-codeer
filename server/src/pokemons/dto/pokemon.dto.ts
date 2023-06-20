@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-class PokemonBase {
+export class PokemonBase {
     @ApiProperty()
     public HP: number;
     @ApiProperty()
