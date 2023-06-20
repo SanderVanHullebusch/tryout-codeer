@@ -8,6 +8,8 @@ import { Page } from "../components/page";
 import { Alert, Table, Tag } from "antd";
 import { typeColors } from "../misc/typeColors";
 
+import './../styles/antd/table.css';
+
 export const PokemonList: FC = () => {
   const [pokemons, setPokemons] = useState<Pokemon[] | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
