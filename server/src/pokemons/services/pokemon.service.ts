@@ -15,17 +15,23 @@ export class PokemonService {
     }
     
     findMaxBase(): PokemonBase {
-        // const initial = {
-        //     base: {
-        //         'HP': 0,
-        //         'Attack': 0,
-        //         'Defense': 0,
-        //         'Sp. Attack': 0,
-        //         'Sp. Defense': 0,
-        //         'Speed': 0
-        //     }
-        // }
-        return this.pokemons[150].base; // TODO: x
+        const initial = {
+            'HP': 0,
+            'Attack': 0,
+            'Defense': 0,
+            'Sp. Attack': 0,
+            'Sp. Defense': 0,
+            'Speed': 0
+        }
+        const max = this.pokemons.reduce((max, current) => {
+            for (const [key, value] of Object.entries(current.base)) {
+                if( value > max[key] ) {
+                    max[key] = value
+                }
+            }
+            return max;
+        }, initial)
+        return max;
     }
     
     findOne(id:number): PokemonDto {
