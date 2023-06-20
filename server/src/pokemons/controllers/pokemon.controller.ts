@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { PokemonDto } from '../dto/pokemon.dto';
 import { PokemonService } from '../services';
@@ -12,5 +12,12 @@ export class PokemonController {
     @ApiOkResponse({ type: [PokemonDto] })
     public findAll(): PokemonDto[] {
         return this.pokemonService.findAll();
+    }
+
+    @Get('/:id')
+    @ApiOperation({ summary: 'Get a pokemon by id' })
+    @ApiOkResponse({ type: [PokemonDto] })
+    public findOne(@Param('id') id: number): PokemonDto {
+        return this.pokemonService.findOne(id);
     }
 }
