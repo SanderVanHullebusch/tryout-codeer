@@ -16,3 +16,18 @@
 .base-element p {
   margin-bottom: 0;
 }
+
+.base-element__progress {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.base-element__progress .ant-progress {
+  flex-grow: 1;
+}
+
+.base-element__progress p {
+  flex-basis: 2.25em;
+  text-align: right;
+}
