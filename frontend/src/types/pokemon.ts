@@ -20,12 +20,12 @@ export enum PokemonType {
 }
 
 export type PokemonBase = {
-    "HP": string,
-    "Attack": string,
-    "Defense": string,
-    "Sp. Attack": string,
-    "Sp. Defense": string,
-    "Speed": string
+    "HP": number,
+    "Attack": number,
+    "Defense": number,
+    "Sp. Attack": number,
+    "Sp. Defense": number,
+    "Speed": number
 }
 
 export type Pokemon = {
