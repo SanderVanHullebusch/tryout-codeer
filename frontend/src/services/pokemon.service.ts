@@ -12,6 +12,10 @@ export const getPokemon = (id: number) => {
     return fetch(API_URL + `/pokemons/${id}`)
         .then((response: Response) => response.json())
         .catch(() => {
+            // Number(0) returns 0 (=== false)
+            if( id === 0 ) {
+                throw new Error(`Pokemon developers don't start counting from zero apparently.`);
+            }
             if( !Number(id) ) {
                 throw new Error(`Id must be of type number`);
             }
