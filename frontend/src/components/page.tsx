@@ -12,14 +12,14 @@ interface Props {
 export const Page: FC<Props> = ({ children }) => {
     return (
         <Layout>
-            <Header>
+            <Header style={{padding: '0'}}>
                 <Container>
                     <Link to={"/"}>
                         <img src={logo} style={{ width: '150px' }} className="App-logo" alt="logo" />
                     </Link>
                 </Container>
             </Header>
-            <Content style={{ height: "100%", padding: "2rem 0" }}>
+            <Content style={{ height: "100%", padding: "1.5rem 0" }}>
                 <Container>
                     {children}
                 </Container>
