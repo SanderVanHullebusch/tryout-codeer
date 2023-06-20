@@ -12,21 +12,17 @@ import './../styles/antd/table.css';
 
 export const PokemonList: FC = () => {
   const [pokemons, setPokemons] = useState<Pokemon[] | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true)
 
     pokemonService.getPokemons()
       .then(value => {
-        setLoading(false)
         setPokemons(value)
       })
       .catch((error: Error) => {
-        setLoading(false)
         setError(error.message)
       })
   }, []);
@@ -44,7 +40,7 @@ export const PokemonList: FC = () => {
   if( !pokemons ) {
     return (
       <Page>
-        <h1>No pokemons.</h1>
+        <h1>Loading...</h1>
       </Page>
     );
   }
@@ -85,9 +81,7 @@ export const PokemonList: FC = () => {
       <Table 
         dataSource={pokemons} 
         columns={columns} 
-        rowKey="id" 
-        loading={loading}
-
+        rowKey="id"
         onRow={(record) => ({
           onClick: () => navigate(`/${record.id}`)})
         }

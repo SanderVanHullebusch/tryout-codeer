@@ -52,7 +52,7 @@ export const PokemonDetail: FC = () => {
   if( !pokemon || !pokemonMaxBase ) {
     return (
       <Page>
-        <h1>No pokemon with id '{id}' found.</h1>
+        <h1>Loading...</h1>
       </Page>
     );
   }
@@ -76,7 +76,7 @@ export const PokemonDetail: FC = () => {
   
   return (
     <Page>
-      <Card loading={false}>
+      <Card>
         <h1>#{pokemon.id} {pokemon.name}</h1>
         <div>
           {pokemon.type.map(type => {
