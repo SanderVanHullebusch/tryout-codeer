@@ -1,0 +1,18 @@
+.base {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  margin-top: 1em;
+}
+
+.base > div {
+  flex-grow: 1;
+}
+
+.base-element {
+  margin-bottom: 1em;
+}
+
+.base-element p {
+  margin-bottom: 0;
+}
