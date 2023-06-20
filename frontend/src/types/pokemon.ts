@@ -19,7 +19,7 @@ export enum PokemonType {
     WATER = "water",
 }
 
-type PokemonBase = {
+export type PokemonBase = {
     "HP": string,
     "Attack": string,
     "Defense": string,
