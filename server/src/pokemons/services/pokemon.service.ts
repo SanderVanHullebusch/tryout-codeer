@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as pokemonJson from '../data/pokemons.json';
 import { PokemonBase, PokemonDto } from '../dto/pokemon.dto';
 
@@ -36,5 +36,12 @@ export class PokemonService {
     
     findOne(id:number): PokemonDto {
         return this.pokemons.find(item => {if(item.id == id){return item.id;}});
+    }
+
+    deleteOne(id: number){
+        const pokemonIndex = this.pokemons.findIndex((item) => { return item.id == id;});
+        if (!pokemonIndex) throw new HttpException(`No pokemon found with id ${id}`, HttpStatus.NOT_FOUND);
+        this.pokemons.splice(pokemonIndex, 1);
+        return `Pokemon with id ${id} has been deleted successfully.`;
     }
 }
