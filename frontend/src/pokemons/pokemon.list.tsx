@@ -6,7 +6,7 @@ import { Pokemon, PokemonType } from "../types/pokemon";
 
 import { Page } from "../components/page";
 import { Alert, Table, Tag } from "antd";
-import { typeColors } from "../misc/typeColors";
+import { typeColors } from "../misc/types";
 
 import './../styles/antd/table.css';
 

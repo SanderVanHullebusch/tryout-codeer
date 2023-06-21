@@ -8,7 +8,7 @@ import { Page } from "../components/page";
 import { DeleteOutlined } from "@ant-design/icons";
 
 import { Pokemon, PokemonBase } from "../types/pokemon";
-import { typeColors } from "../misc/typeColors";
+import { typeColors } from "../misc/types";
 import styles from './pokemon.detail.module.css';
 
 
