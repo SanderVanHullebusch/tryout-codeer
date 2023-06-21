@@ -30,3 +30,11 @@ export const getPokemon = (id: number) => {
             throw new Error(`Couldn't fetch pokemon with id ${id}`);
         })
 }
+
+export const deletePokemon = (id: number) => {
+    return fetch(API_URL + `/pokemons/${id}`, { method: 'DELETE' })
+        .then((response: Response) => response)
+        .catch((error: Error) => {
+            throw new Error(`Couldn't delete pokemon with id ${id}: ${error}`);
+        })
+}
