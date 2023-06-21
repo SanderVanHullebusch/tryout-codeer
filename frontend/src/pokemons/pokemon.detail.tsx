@@ -1,10 +1,12 @@
-import { Alert, Card, Tag, Progress } from "antd";
+import { Alert, Button, Card, Tag, Progress } from "antd";
 import { FC, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import * as pokemonService from "../services/pokemon.service"
 
 import { Page } from "../components/page";
+import { DeleteOutlined } from "@ant-design/icons";
+
 import { Pokemon, PokemonBase } from "../types/pokemon";
 import { typeColors } from "../misc/typeColors";
 import styles from './pokemon.detail.module.css';
@@ -15,7 +17,10 @@ type RouteProps = {
 };
 
 export const PokemonDetail: FC = () => {
+  const navigate = useNavigate();
+
   const { id } = useParams<RouteProps>();
+
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [pokemonMaxBase, setPokemonMaxBase] = useState<PokemonBase | null>(null);
   const [error, setError] = useState<string | null>(null)
@@ -73,19 +78,39 @@ export const PokemonDetail: FC = () => {
       </div>
     )
   }
+
+  const deleteById = (e: React.MouseEvent<HTMLElement>, id: number) => {
+    e.preventDefault()
+
+    pokemonService.deletePokemon(id)
+      .then(() => {
+        navigate(`/`)
+      })
+      .catch((error: Error) => {
+        setError(error.message)
+      })
+  }
   
   return (
     <Page>
       <Card>
-        <h1>#{pokemon.id} {pokemon.name}</h1>
-        <div>
-          {pokemon.type.map(type => {
-            return (
-              <Tag color={typeColors[type.toLowerCase()]} key={type}>
-                  {type}
-                </Tag>
-              );
-            })}
+        <div style={{ display: 'flex', flexDirection: 'row', gap: '1em', justifyContent: 'space-between' }}>
+          <div>
+            <h1>#{pokemon.id} {pokemon.name}</h1>
+            <div>
+              {pokemon.type.map(type => {
+                return (
+                  <Tag color={typeColors[type.toLowerCase()]} key={type}>
+                      {type}
+                    </Tag>
+                  );
+                })}
+            </div>
+          </div>
+          <Button 
+              type="primary" icon={<DeleteOutlined />} size='middle' 
+              onClick={(e) => deleteById(e, Number(id))}
+            />
         </div>
         <hr style={{ marginTop: '1.25em'}} />
 
