@@ -1,5 +1,26 @@
 // import { PokemonType } from "../types/pokemon";
 
+export const types = [
+    'Bug',
+    'Dark',
+    'Dragon',
+    'Electric',
+    'Fairy',
+    'Fighting',
+    'Fire',
+    'Flying',
+    'Ghost',
+    'Grass',
+    'Ground',
+    'Ice',
+    'Normal',
+    'Poison',
+    'Psychic',
+    'Rock',
+    'Steel',
+    'Water',
+]
+
 export const typeColors: { [index: string]: string } = {
     bug: '#A8B820',
     dark: '#705848',
