@@ -40,7 +40,7 @@ export class PokemonService {
 
     deleteOne(id: number){
         const pokemonIndex = this.pokemons.findIndex((item) => { return item.id == id;});
-        if (!pokemonIndex) throw new HttpException(`No pokemon found with id ${id}`, HttpStatus.NOT_FOUND);
+        if (pokemonIndex === -1) throw new HttpException(`No pokemon found with id ${id}`, HttpStatus.NOT_FOUND);
         this.pokemons.splice(pokemonIndex, 1);
         return `Pokemon with id ${id} has been deleted successfully.`;
     }
