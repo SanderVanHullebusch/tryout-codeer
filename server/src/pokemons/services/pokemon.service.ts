@@ -44,4 +44,17 @@ export class PokemonService {
         this.pokemons.splice(pokemonIndex, 1);
         return `Pokemon with id ${id} has been deleted successfully.`;
     }
+    
+    addOne(values: Omit<PokemonDto, 'id'>){
+        // Get the max id currently set
+        const maxId = this.pokemons.reduce((max: number, curr: PokemonDto) => {
+            return curr.id > max ? curr.id : max;
+        }, 0);
+        
+        const pokemon : PokemonDto = {
+            id: maxId + 1,
+            ...values
+        }
+        pokemonJson.push(pokemon)
+    }
 }

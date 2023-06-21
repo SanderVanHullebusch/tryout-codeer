@@ -1,5 +1,5 @@
-import { Controller, Get, Delete, Param } from '@nestjs/common';
-import { ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { Controller, Get, Delete, Param, Post, Body } from '@nestjs/common';
+import { ApiCreatedResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { PokemonBase, PokemonDto } from '../dto/pokemon.dto';
 import { PokemonService } from '../services';
 
@@ -35,5 +35,13 @@ export class PokemonController {
     @ApiNotFoundResponse({ description: 'Resource not found' })
     public deleteOne(@Param('id') id: number) {
         return this.pokemonService.deleteOne(id);
+    }
+
+    @Post()
+    @ApiOperation({ summary: 'Add a pokemon' })
+    @ApiCreatedResponse({ description: 'Pokemon has been successfully added' })
+    @ApiForbiddenResponse({ description: 'Unauthorized Request' })
+    async create(@Body() data: Omit<PokemonDto, 'id'>) {
+        this.pokemonService.addOne(data);
     }
 }
