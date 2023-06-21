@@ -1,9 +1,11 @@
 import { FC } from "react";
 
 import { Modal, Input, InputNumber, Form, Select, Row, Col, Button } from 'antd';
+import * as pokemonService from "./../../services/pokemon.service"
 import { types } from "../../misc/types";
 
 import styles from "./addModal.module.css";
+import { Pokemon, PokemonBase } from "../../types/pokemon";
 
 interface Props {
   isModalOpen?: boolean;
@@ -37,12 +39,31 @@ export const AddModal: FC<Props> = ({
     )
   }
 
-  const onSubmitHandler = (values: FormData) => {
-    console.log( 'values', values )
+  const onSubmitHandler = async (values: any) => {
+
+    const pokemonBase: PokemonBase = {
+      'HP': Number(values['base.HP']),
+      'Speed': Number(values['base.Speed']),
+      'Attack': Number(values['base.Attack']),
+      'Defense': Number(values['base.Defense']),
+      'Sp. Attack': Number(values['base.Sp. Attack']),
+      'Sp. Defense': Number(values['base.Sp. Defense']),
+    }
+
+    const pokemon: Omit<Pokemon, 'id'> = {
+      name: values.name,
+      type: values.type,
+      base: pokemonBase
+    }
+
+    await pokemonService.addPokemon(pokemon)
+      .then((res) => {
+        window.location.reload()
+      });
   }
 
   return (
-    <Modal title="Add new pokemon" open={isModalOpen} /*onOk={onOkHandler}*/ onCancel={onCancel} /*okText="Submit"*/ footer={null}>
+    <Modal title="Add new pokemon" open={isModalOpen} onCancel={onCancel} footer={null}>
       <Form id="new_pokemon" onFinish={onSubmitHandler} requiredMark={'optional'}>
 
         <Row gutter={16}>
