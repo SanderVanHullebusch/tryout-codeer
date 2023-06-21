@@ -1,3 +1,5 @@
+import { Pokemon } from "../types/pokemon";
+
 const API_URL = 'http://localhost:4000'
 
 export const getPokemons = () => {
@@ -36,5 +38,17 @@ export const deletePokemon = (id: number) => {
         .then((response: Response) => response)
         .catch((error: Error) => {
             throw new Error(`Couldn't delete pokemon with id ${id}: ${error}`);
+        })
+}
+
+export const addPokemon = (data: Omit<Pokemon, 'id'>) => {
+    return fetch(API_URL + `/pokemons`, { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+        .then((response: Response) => response)
+        .catch((error: Error) => {
+            throw new Error(`Couldn't add pokemon with: ${error}`);
         })
 }
